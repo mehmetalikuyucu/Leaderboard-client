@@ -1,20 +1,24 @@
 "use client";
 
-import React from 'react';
-import { useLoadData } from '@/app/hooks/useLoadData';
-import { Coins, Users } from 'lucide-react';
-import { useLeaderboard } from '@hooks/use-leader-board';
-import { useDragAndDrop } from '@hooks/use-drag-drop';
-import { DraggableRow } from '@components/leader-board-table/draggable-row';
-import { TableHeader } from '@components/leader-board-table/table-header';
-import { getLeaderBoardColumns } from './leader-board-table-columns';
-import { DndContext, closestCenter } from '@dnd-kit/core';
-import { SortableContext, verticalListSortingStrategy } from '@dnd-kit/sortable';
-import { useReactTable, getCoreRowModel, getSortedRowModel } from '@tanstack/react-table';
+import React from "react";
+import { Coins, Users } from "lucide-react";
+import { useLeaderboard } from "@hooks/use-leader-board";
+import { useDragAndDrop } from "@hooks/use-drag-drop";
+import { DraggableRow } from "@components/leader-board-table/draggable-row";
+import { TableHeader } from "@components/leader-board-table/table-header";
+import { getLeaderBoardColumns } from "./leader-board-table-columns";
+import { DndContext, closestCenter } from "@dnd-kit/core";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import {
+  useReactTable,
+  getCoreRowModel,
+  getSortedRowModel,
+} from "@tanstack/react-table";
 
 export default function LeaderboardTable() {
-  const { isLoading, isDisabled, createBulkData } = useLoadData();
-  
   const {
     sorting,
     setSorting,
@@ -32,13 +36,13 @@ export default function LeaderboardTable() {
   const { sensors, handleDragEnd } = useDragAndDrop(moveRow);
 
   const columns = React.useMemo(() => getLeaderBoardColumns(), []);
-  
+
   const table = useReactTable({
     data: rows,
     columns,
     state: {
       sorting,
-      grouping: grouping ? ['details_country'] : [],
+      grouping: grouping ? ["details_country"] : [],
     },
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
@@ -60,27 +64,13 @@ export default function LeaderboardTable() {
 
   return (
     <div>
-      {!isDisabled &&
-        typeof window !== 'undefined' &&
-        !localStorage.getItem('loadDataDisabled') && (
-          <div className="text-center mb-2">
-            <button
-              className="text-game-dark-background-80 dark:text-game-light-border flex items-center gap-2 transition-colors"
-              onClick={createBulkData}
-              disabled={isLoading || isDisabled}
-            >
-              {isLoading ? 'Loading...' : 'Load Initial Data'}
-            </button>
-          </div>
-        )}
-        
       <div className="mb-4 flex items-center justify-between gap-4">
         <button
           onClick={() => setGrouping(!grouping)}
           className={`flex items-center gap-2 px-4 py-2 rounded-lg transition-colors ${
             grouping
-              ? 'bg-purple-500 text-white'
-              : 'bg-game-light-background dark:bg-game-dark-background text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-white'
+              ? "bg-purple-500 text-white"
+              : "bg-game-light-background dark:bg-game-dark-background text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-white"
           }`}
         >
           <Users className="h-4 w-4" />
@@ -101,7 +91,7 @@ export default function LeaderboardTable() {
         onDragEnd={handleDragEnd}
       >
         <SortableContext
-          items={table.getRowModel().rows.map(row => row.id)}
+          items={table.getRowModel().rows.map((row) => row.id)}
           strategy={verticalListSortingStrategy}
         >
           <div className="flex flex-col gap-2">
