@@ -2,16 +2,16 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   /* config options here */
+  output: "standalone",
   images: {
-    remotePatterns:[
+    remotePatterns: [
       {
         hostname: "www.panteon.games",
-        port: '',
+        port: "",
         protocol: "https",
-        pathname: "/wp-content/themes/panteon/assets/img/logo@2x.png"
-        
-      }
-    ]
+        pathname: "/wp-content/themes/panteon/assets/img/logo@2x.png",
+      },
+    ],
   },
 };
 
