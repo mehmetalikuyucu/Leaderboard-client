@@ -3,8 +3,8 @@
 import { Search as SearchIcon } from "lucide-react";
 import { useAtom } from "jotai";
 import { searchPlayerAtom } from "../store/search-player";
-import {  useCallback, useState } from "react";
-import debounce from 'lodash/debounce';
+import { useCallback, useState } from "react";
+import debounce from "lodash/debounce";
 const Search = () => {
   const [searchValue, setSearchValue] = useAtom(searchPlayerAtom);
 
@@ -14,7 +14,7 @@ const Search = () => {
     debounce((value: string) => {
       setSearchValue(value);
     }, 300),
-    []
+    [searchValue]
   );
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;

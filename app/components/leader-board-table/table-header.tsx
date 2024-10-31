@@ -1,7 +1,8 @@
-import { flexRender, Header, HeaderGroup } from '@tanstack/react-table';
+import { Player } from "@/app/types/leader-board.types";
+import { flexRender, HeaderGroup } from "@tanstack/react-table";
 
 interface TableHeaderProps {
-  headerGroups: HeaderGroup<any>[];
+  headerGroups: HeaderGroup<Player>[];
 }
 
 export const TableHeader = ({ headerGroups }: TableHeaderProps) => {
@@ -17,7 +18,10 @@ export const TableHeader = ({ headerGroups }: TableHeaderProps) => {
                 className="flex-1 text-left text-sm text-gray-700 dark:text-white hover:text-purple-600 dark:hover:text-purple-400 cursor-pointer"
                 onClick={() => header.column.toggleSorting()}
               >
-                {flexRender(header.column.columnDef.header, header.getContext())}
+                {flexRender(
+                  header.column.columnDef.header,
+                  header.getContext()
+                )}
               </div>
             ))}
           </div>

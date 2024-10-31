@@ -1,8 +1,9 @@
-import { useState, useEffect } from 'react';
-import { useAtom } from 'jotai';
-import { searchPlayerAtom } from '@/app/store/search-player';
-import type { SortingState } from '@tanstack/react-table';
-import { useLeaderboardQueries, Player } from './use-leader-board-queries';
+import { useState, useEffect } from "react";
+import { useAtom } from "jotai";
+import { searchPlayerAtom } from "@/app/store/search-player";
+import type { SortingState } from "@tanstack/react-table";
+import { useLeaderboardQueries } from "./use-leader-board-queries";
+import { Player } from "../types/leader-board.types";
 
 export const useLeaderboard = () => {
   const [sorting, setSorting] = useState<SortingState>([]);
@@ -16,7 +17,7 @@ export const useLeaderboard = () => {
     isPrizePoolLoading,
     isPlayersLoading,
     isError,
-    error
+    error,
   } = useLeaderboardQueries(searchValue);
 
   useEffect(() => {
@@ -45,6 +46,6 @@ export const useLeaderboard = () => {
     isPrizePoolLoading,
     isPlayersLoading,
     isError,
-    error
+    error,
   };
 };

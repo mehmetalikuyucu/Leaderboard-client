@@ -1,21 +1,7 @@
-import { useQuery } from '@tanstack/react-query';
-import axios from 'axios';
-import { CLIENT_URLS } from '../constants/client-urls';
-
-export type Player = {
-  id: string;
-  playerName: string;
-  score: number;
-  rank: number;
-  details: {
-    country: string;
-    money: string;
-    userId: string;
-    username: string;
-    name: string;
-    surname: string;
-  };
-};
+import { useQuery } from "@tanstack/react-query";
+import axios from "axios";
+import { CLIENT_URLS } from "../constants/client-urls";
+import { Player } from "../types/leader-board.types";
 
 export type QueryResponse = {
   data: Player[];
@@ -23,18 +9,20 @@ export type QueryResponse = {
 
 export const useLeaderboardQueries = (searchValue: string) => {
   const prizePoolQuery = useQuery({
-    queryKey: ['prizePoolQuery'],
+    queryKey: ["prizePoolQuery"],
     queryFn: async () => {
-      const response = await axios.get(CLIENT_URLS.base+CLIENT_URLS.prizePool);
+      const response = await axios.get(
+        CLIENT_URLS.base + CLIENT_URLS.prizePool
+      );
       return response.data;
     },
   });
 
   const playerQuery = useQuery({
-    queryKey: ['playersQuery', searchValue],
+    queryKey: ["playersQuery", searchValue],
     queryFn: async () => {
       const response = await axios.get<QueryResponse>(
-        `${CLIENT_URLS.base+CLIENT_URLS.search}?playerName=${searchValue}`
+        `${CLIENT_URLS.base + CLIENT_URLS.search}?playerName=${searchValue}`
       );
       return response.data;
     },

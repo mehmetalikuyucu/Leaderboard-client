@@ -3,9 +3,10 @@ import { CSS } from '@dnd-kit/utilities';
 import { flexRender } from '@tanstack/react-table';
 import { GripVertical } from 'lucide-react';
 import { Row } from '@tanstack/react-table';
+import { Player } from '@/app/types/leader-board.types';
 
 interface DraggableRowProps {
-  row: Row<any>;
+  row: Row<Player>;
 }
 
 export const DraggableRow = ({ row }: DraggableRowProps) => {

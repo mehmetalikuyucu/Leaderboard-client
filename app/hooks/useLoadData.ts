@@ -15,7 +15,6 @@ export enum PlayerRank {
   GOLD = "Gold",
 }
 
-
 interface User {
   id: string;
   username: string;
@@ -37,10 +36,6 @@ interface Stats {
   moneyAdded: number;
 }
 
-interface LogEntry {
-  timestamp: string;
-  message: string;
-}
 
 
 interface UseLoadDataReturn {
@@ -53,7 +48,6 @@ interface UseLoadDataReturn {
 
   createBulkData: () => Promise<void>;
 }
-
 
 const NAMES: string[] = [
   "John",
@@ -96,7 +90,6 @@ export const useLoadData = (): UseLoadDataReturn => {
   });
   const [error, setError] = useState<string>("");
 
-
   const createBulkData = async (): Promise<void> => {
     setIsLoading(true);
     setIsDisabled(true);
@@ -130,8 +123,7 @@ export const useLoadData = (): UseLoadDataReturn => {
 
           await new Promise((resolve) => setTimeout(resolve, 100));
         } catch (err) {
-          const errorMessage =
-            err instanceof Error ? err.message : "An unknown error occurred";
+          console.error(err);
         }
       }
 
@@ -155,12 +147,9 @@ export const useLoadData = (): UseLoadDataReturn => {
           createdPlayers.push(playerResponse.data);
           await new Promise((resolve) => setTimeout(resolve, 100));
         } catch (err) {
-          const errorMessage =
-            err instanceof Error ? err.message : "An unknown error occurred";
-
+          console.error(err);
         }
       }
-
 
       setCurrentStep("Adding Money");
       for (let i = 0; i < createdUsers.length; i++) {
@@ -175,21 +164,17 @@ export const useLoadData = (): UseLoadDataReturn => {
 
           setStats((prev) => ({ ...prev, moneyAdded: prev.moneyAdded + 1 }));
           setProgress(66 + ((i + 1) * 34) / createdUsers.length);
-         
+
           await new Promise((resolve) => setTimeout(resolve, 100));
         } catch (err) {
-          const errorMessage =
-            err instanceof Error ? err.message : "An unknown error occurred";
-         
+          console.error(err);
         }
       }
 
       setProgress(100);
       setCurrentStep("Completed");
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : "An unknown error occurred";
-      setError(errorMessage);
+      console.error(err);
     } finally {
       setIsLoading(false);
     }

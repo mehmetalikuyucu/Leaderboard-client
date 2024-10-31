@@ -1,13 +1,15 @@
-import { CountryFlag } from './country-flag';
-import { ChevronsUpDown } from 'lucide-react';
+import { Row } from "@tanstack/react-table";
+import { CountryFlag } from "./country-flag";
+import { ChevronsUpDown } from "lucide-react";
+import { Player } from "../types/leader-board.types";
 
-export const RankCell = ({ row }: { row: any }) => (
+export const RankCell = ({ row }: { row: Row<Player> }) => (
   <div className="text-gray-700 dark:text-gray-300 font-medium">
     #{row.original.rank}
   </div>
 );
 
-export const PlayerCell = ({ row }: { row: any }) => (
+export const PlayerCell = ({ row }: { row: Row<Player> }) => (
   <div className="flex flex-col">
     <span className="text-gray-900 dark:text-gray-200 font-medium">
       {row.original.playerName}
@@ -18,14 +20,14 @@ export const PlayerCell = ({ row }: { row: any }) => (
   </div>
 );
 
-export const CountryCell = ({ row }: { row: any }) => (
+export const CountryCell = ({ row }: { row: Row<Player> }) => (
   <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
     <CountryFlag country={row.original.details.country} />
     <span>{row.original.details.country}</span>
   </div>
 );
 
-export const MoneyCell = ({ row }: { row: any }) => (
+export const MoneyCell = ({ row }: { row: Row<Player> }) => (
   <div className="text-green-600 dark:text-green-400 font-medium">
     ${row.original.details.money}
   </div>
